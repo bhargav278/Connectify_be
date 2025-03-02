@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const { signUpValidations } = require('../Utils/validations');
 const User = require('../Models/user');
 const jwt = require('jsonwebtoken');
+const {sendResponse} = require('../Utils/response')
 
 authRouter.post("/signup", async (req, res) => {
     try {
@@ -31,26 +32,27 @@ authRouter.post("/login", async (req, res) => {
         }
         const user = await User.findOne({ $or: [{ userName: userEmail }, { emailId: userEmail }] });
         if (!user) {
-            throw new Error("User doesn't exist!");
+            sendResponse(404,{msg :"User doesn't exist!"},res);
         }
         else {
             const verifyPassword = await bcrypt.compare(password, user.password);
             if (!verifyPassword) {
                 throw new Error("Invalid Credentials");
             }
-            let token = jwt.sign({id : user._id},process.env.SECRET_CODE);
-            res.cookie("token",token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) })
-            res.send("Login Succesfull!")            
+            let token = jwt.sign({id : user._id},process.env.SECRET_CODE,{expiresIn:'1d'});
+            const responseData = {msg : "Login Succesfull!", token : token}
+            sendResponse(200,responseData,res)          
         }
     }
     catch (error) {
-        res.send("ERROR : " + error.message);
+        sendResponse(400,{msg : error.msg},res);
     }
 })
 
 authRouter.post("/logout", async (req,res) => {
-    res.cookie("token", null , {expires : new Date(Date.now())});
-    res.send("Logged out succesfully!");
+    
+    //blackList token pending...
+    sendResponse(200,{msg : "Logged out succesfully!"},res)
 })
 
 module.exports = authRouter;
