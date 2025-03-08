@@ -17,10 +17,10 @@ authRouter.post("/signup", async (req, res) => {
             password: encryptedPassword
         });
         await user.save();
-        res.send("Sign up succesfull!")
+        sendResponse(200,{msg: "Signup Successfull!"},res)
     }
     catch (err) {
-        res.send("ERROR : " + err.message);
+        sendResponse(400,{msg:err.message},res)
     }
 })
 
@@ -45,7 +45,7 @@ authRouter.post("/login", async (req, res) => {
         }
     }
     catch (error) {
-        sendResponse(400,{msg : error.msg},res);
+        sendResponse(400,{msg : error.message},res);
     }
 })
 
