@@ -1,3 +1,4 @@
+const { boolean } = require('joi');
 const { Schema ,model } = require('mongoose')
 var validator = require('validator');
 
@@ -89,7 +90,11 @@ const userSchema = new Schema({
     about : {
         type : String,
         maxLength : 100,
-    } 
+    },
+    isDeleted : {
+        type : Boolean,
+        default : false
+    }
 } , {timestamps : true});
 
 const User = model("User",userSchema);

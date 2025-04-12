@@ -8,7 +8,7 @@ const signUpValidations = (req) => {
 
 const getTokenFromHeader = (req) => {
     const authHeader = req.headers.authorization; // Get the "Authorization" header
-    if (authHeader && authHeader.startsWith("Bearer ")) {
+    if (authHeader && authHeader.startsWith("Bearer")) {
         return authHeader.split(" ")[1]; // Extract token after "Bearer "
     }
     return null; // Return null if no token found

@@ -18,9 +18,13 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
     "mongoose": "^8.10.1",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
     "validator": "^13.12.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "sequelize-cli": "^6.6.2"
   }
 }
