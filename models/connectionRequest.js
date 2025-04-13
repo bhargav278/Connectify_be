@@ -7,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       // Associations to User
       ConnectionRequest.belongsTo(models.User, {
         foreignKey: 'senderId',
+        targetKey:'userId',
         as: 'Sender'
       });
       ConnectionRequest.belongsTo(models.User, {
         foreignKey: 'receiverId',
+        targetKey: 'userId',
         as: 'Receiver'
       });
       ConnectionRequest.hasOne(models.Connection, {
