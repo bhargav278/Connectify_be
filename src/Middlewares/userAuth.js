@@ -2,7 +2,6 @@ require('dotenv').config()
 const {User} = require("../../models");
 const jwt = require("jsonwebtoken");
 const { getTokenFromHeader } = require('../Utils/validations');
-const { where } = require('sequelize');
 
 const userAuth =async (req,res,next) => {
     try{

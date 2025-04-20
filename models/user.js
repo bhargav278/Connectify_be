@@ -26,6 +26,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'receiverId',
         as: 'ReceivedConnections',
       });
+      User.hasMany(models.Post, {
+        foreignKey : 'ownerId',
+        sourceKey: 'userId'
+      });
+      User.hasOne(models.Like, {
+        foreignKey : 'personId',
+        sourceKey : "userId",
+      })
+      User.hasOne(models.Comment,{
+        foreignKey: "personId",
+        sourceKey : "userId"
+      })
     }
   }
 

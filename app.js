@@ -12,9 +12,11 @@ app.use(cookieParser());
 
 const authRouter = require('./src/Routes/auth');
 const connectionRouter = require('./src/Routes/connectionRequest');
+const postRouter = require('./src/Routes/post');
 
 app.use("/", authRouter);
 app.use("/connection", userAuth, connectionRouter)
+app.use("/post",userAuth, postRouter)
 
 
 // app.get("/Home", userAuth, async (req, res) => {
